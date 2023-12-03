@@ -8,9 +8,9 @@ import static de.luandtong.nachtwaechter.domain.Command.run;
 
 public class Server {
 
-    private ServerInfo serverInfo;
-    private ServerKey serverKey;
-    private ServerConfig serverConfig;
+    private final ServerInfo serverInfo;
+    private final ServerKey serverKey;
+    private final ServerConfig serverConfig;
 
     public Server() throws IOException, InterruptedException {
         this.serverInfo = creativeServerInfo();

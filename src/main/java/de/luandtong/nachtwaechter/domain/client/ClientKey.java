@@ -1,4 +1,4 @@
 package de.luandtong.nachtwaechter.domain.client;
 
-public record ClientKey(String PublicKey, String PrivateKey) {
+public record ClientKey(String ClientPublicKey, String ClientPrivateKey) {
 }

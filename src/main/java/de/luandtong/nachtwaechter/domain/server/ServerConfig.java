@@ -15,7 +15,7 @@ public class ServerConfig {
         this.wg0Conf = "[Interface]\n" +
                 "Address = 10.10.0.1/24\n" +
                 "ListenPort = 51820\n" +
-                "PrivateKey = "+ serverKey.ServerPrivateKey() + "\n" +
+                "ClientPrivateKey = "+ serverKey.ServerPrivateKey() + "\n" +
                 "PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o "
                 + serverInfo.server_eth() + " -j MASQUERADE" + "\n" +
                 "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o "
