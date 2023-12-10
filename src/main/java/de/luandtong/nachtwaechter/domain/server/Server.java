@@ -6,15 +6,16 @@ import java.util.List;
 
 import static de.luandtong.nachtwaechter.domain.Command.run;
 
+//领域事务
 public class Server {
 
     private final ServerInfo serverInfo;
     private final ServerKey serverKey;
     private final ServerConfig serverConfig;
 
-    public Server() throws IOException, InterruptedException {
-        this.serverInfo = creativeServerInfo();
-        this.serverKey = creativeServerKey();
+    public Server(ServerInfo serverInfo, ServerKey serverKey)  {
+        this.serverInfo = serverInfo;
+        this.serverKey = serverKey;
         this.serverConfig = new ServerConfig();
     }
 
@@ -107,5 +108,17 @@ public class Server {
             return "zypper";
         }
         return "apt";  // 默认返回 Ubuntu 的包管理工具
+    }
+
+    public ServerInfo getServerInfo() {
+        return serverInfo;
+    }
+
+    public ServerKey getServerKey() {
+        return serverKey;
+    }
+
+    public ServerConfig getServerConfig() {
+        return serverConfig;
     }
 }
