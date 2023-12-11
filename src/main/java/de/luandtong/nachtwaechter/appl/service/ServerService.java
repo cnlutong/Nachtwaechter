@@ -12,19 +12,17 @@ public class ServerService {
     private Server server;
 
 
-
-    public void init(int serverID){
+    public void init(int serverID) {
         this.server = new Server(serverInfoRepository.findServerInfoByID(serverID), serverKeyRepository.findServerKeyByID(serverID));
     }
 
-    public void saveServerInfo(){
+    public void saveServerInfo() {
         serverInfoRepository.save(this.server.getServerInfo());
     }
 
-    public void saveServerKey(){
+    public void saveServerKey() {
         serverKeyRepository.save(this.server.getServerKey());
     }
-
 
 
 }

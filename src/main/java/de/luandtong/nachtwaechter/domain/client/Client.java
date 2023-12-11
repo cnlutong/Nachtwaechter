@@ -1,6 +1,6 @@
 package de.luandtong.nachtwaechter.domain.client;
 
-import de.luandtong.nachtwaechter.domain.server.ServerKey;
+import de.luandtong.nachtwaechter.domain.server.ServerInfo;
 
 import java.io.IOException;
 
@@ -14,9 +14,14 @@ public class Client {
 
     private ServerPublicInfo serverPublicInfo;
 
+    public Client(ClientInfo clientInfo, ClientKey clientKey, ServerPublicInfo serverPublicInfo) {
 
-    private ClientInfo creativeClientInfo(int clientIndex){
-        return new ClientInfo(clientIndex,  "client" + clientIndex, "10.10.0." + (clientIndex + 2) + "/24");
+
+    }
+
+
+    private ClientInfo creativeClientInfo(int clientIndex) {
+        return new ClientInfo(clientIndex, "client" + clientIndex, "10.10.0." + (clientIndex + 2) + "/24");
     }
 
     //创建ServerKey数据类
@@ -32,5 +37,19 @@ public class Client {
         return new ClientKey(client_public, client_private);
     }
 
+    public ClientInfo getClientInfo() {
+        return clientInfo;
+    }
 
+    public ClientKey getClientKey() {
+        return clientKey;
+    }
+
+    public ClientConfig getClientConfig() {
+        return clientConfig;
+    }
+
+    public ServerPublicInfo getServerPublicInfo() {
+        return serverPublicInfo;
+    }
 }

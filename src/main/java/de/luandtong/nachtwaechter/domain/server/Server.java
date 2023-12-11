@@ -1,7 +1,10 @@
 package de.luandtong.nachtwaechter.domain.server;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.List;
 
 import static de.luandtong.nachtwaechter.domain.Command.run;
@@ -13,7 +16,7 @@ public class Server {
     private final ServerKey serverKey;
     private final ServerConfig serverConfig;
 
-    public Server(ServerInfo serverInfo, ServerKey serverKey)  {
+    public Server(ServerInfo serverInfo, ServerKey serverKey) {
         this.serverInfo = serverInfo;
         this.serverKey = serverKey;
         this.serverConfig = new ServerConfig();
@@ -68,9 +71,9 @@ public class Server {
         //String server_eth, String server_ip, String server_port, String pkgMgr
         String server_eth = run("ip -o -4 route show to default | awk '{print $5}'");
         String server_ip = run("curl -s ifconfig.me");
-        String server_port= "6888";
+        String server_port = "6888";
         String pkgMgr = getPackageManagerCmd();
-        return new ServerInfo(server_eth,server_ip,server_port,pkgMgr);
+        return new ServerInfo(server_eth, server_ip, server_port, pkgMgr);
     }
 
     //创建ServerKey数据类

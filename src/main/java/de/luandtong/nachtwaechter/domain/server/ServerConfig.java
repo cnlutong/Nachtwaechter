@@ -1,7 +1,9 @@
 package de.luandtong.nachtwaechter.domain.server;
 
-import java.io.*;
-import java.nio.file.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import static de.luandtong.nachtwaechter.domain.Command.run;
 
@@ -15,7 +17,7 @@ public class ServerConfig {
         this.wg0Conf = "[Interface]\n" +
                 "Address = 10.10.0.1/24\n" +
                 "ListenPort = 51820\n" +
-                "ClientPrivateKey = "+ serverKey.ServerPrivateKey() + "\n" +
+                "ClientPrivateKey = " + serverKey.ServerPrivateKey() + "\n" +
                 "PostUp = iptables -A FORWARD -i wg0 -j ACCEPT; iptables -t nat -A POSTROUTING -o "
                 + serverInfo.server_eth() + " -j MASQUERADE" + "\n" +
                 "PostDown = iptables -D FORWARD -i wg0 -j ACCEPT; iptables -t nat -D POSTROUTING -o "
@@ -34,7 +36,7 @@ public class ServerConfig {
         // 修改 WireGuard 配置文件和密钥的权限
         run("sudo chmod -R 600 /etc/wireguard/");
 
-        }
+    }
 
 
 }
