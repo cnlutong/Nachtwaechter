@@ -1,5 +1,7 @@
 package de.luandtong.nachtwaechter.domain.server;
 
+import de.luandtong.nachtwaechter.domain.WireGuardKey;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -13,12 +15,12 @@ import static de.luandtong.nachtwaechter.domain.Command.run;
 public class Server {
 
     private final ServerInfo serverInfo;
-    private final ServerKey serverKey;
+    private final WireGuardKey wireGuardKey;
     private final ServerConfig serverConfig;
 
-    public Server(ServerInfo serverInfo, ServerKey serverKey) {
+    public Server(ServerInfo serverInfo, WireGuardKey wireGuardKey) {
         this.serverInfo = serverInfo;
-        this.serverKey = serverKey;
+        this.wireGuardKey = wireGuardKey;
         this.serverConfig = new ServerConfig();
     }
 
@@ -57,7 +59,7 @@ public class Server {
         //安装应用
         serverInstall();
 
-        serverConfig.serverInit(this.serverInfo, this.serverKey);
+        serverConfig.serverInit(this.serverInfo, this.wireGuardKey);
     }
 
     private void serverStart() throws IOException, InterruptedException {
@@ -77,7 +79,7 @@ public class Server {
     }
 
     //创建ServerKey数据类
-    private ServerKey creativeServerKey() throws IOException, InterruptedException {
+    private WireGuardKey creativeServerKey() throws IOException, InterruptedException {
         // 生成 WireGuard 私钥和公钥
         run("wg genkey | sudo tee /etc/wireguard/server_private.key | wg pubkey | sudo tee /etc/wireguard/server_public.key");
 
@@ -85,7 +87,7 @@ public class Server {
         String server_private = run("sudo cat /etc/wireguard/server_private.key");
         String server_public = run("sudo cat /etc/wireguard/server_public.key");
 
-        return new ServerKey(server_public, server_private);
+        return new WireGuardKey(server_public, server_private);
     }
 
     private void serverInstall() throws IOException, InterruptedException {
@@ -117,8 +119,8 @@ public class Server {
         return serverInfo;
     }
 
-    public ServerKey getServerKey() {
-        return serverKey;
+    public WireGuardKey getServerKey() {
+        return wireGuardKey;
     }
 
     public ServerConfig getServerConfig() {
