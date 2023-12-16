@@ -7,18 +7,25 @@ import org.springframework.data.relational.core.mapping.Table;
 public class WireGuardKeyDTO {
 
 
-    @Id
-    private Long id;
+    private final String uuid;
     private final String publicKey;
     private final String privateKey;
+    @Id
+    private Long id;
 
-    public WireGuardKeyDTO(String publicKey, String privateKey) {
+
+    public WireGuardKeyDTO(String uuid, String publicKey, String privateKey) {
+        this.uuid = uuid;
         this.publicKey = publicKey;
         this.privateKey = privateKey;
     }
 
     public Long getId() {
         return id;
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 
     public String getPublicKey() {
@@ -28,4 +35,5 @@ public class WireGuardKeyDTO {
     public String getPrivateKey() {
         return privateKey;
     }
+
 }

@@ -3,6 +3,8 @@ package de.luandtong.nachtwaechter.datenbank.wireGuardKey;
 import de.luandtong.nachtwaechter.appl.repository.WireGuardKeyRepository;
 import de.luandtong.nachtwaechter.domain.WireGuardKey;
 
+import java.util.UUID;
+
 public class WireGuardKeyRepositoryImplement implements WireGuardKeyRepository {
 
     private WireGuardKeyDBRepository wireGuardKeyDBRepository;
@@ -17,11 +19,11 @@ public class WireGuardKeyRepositoryImplement implements WireGuardKeyRepository {
         return DTOToEntity(wireGuardKeyDBRepository.findWireGuardKeyDTOById(id));
     }
 
-    WireGuardKeyDTO EntityToDTO(WireGuardKey wireGuardKey){
-        return new WireGuardKeyDTO(wireGuardKey.publicKey(), wireGuardKey.privateKey());
+    WireGuardKeyDTO EntityToDTO(WireGuardKey wireGuardKey) {
+        return new WireGuardKeyDTO(wireGuardKey.uuid().toString(), wireGuardKey.publicKey(), wireGuardKey.privateKey());
     }
 
-    WireGuardKey DTOToEntity(WireGuardKeyDTO wireGuardKeyDTO){
-        return new WireGuardKey(wireGuardKeyDTO.getPublicKey(), wireGuardKeyDTO.getPrivateKey());
+    WireGuardKey DTOToEntity(WireGuardKeyDTO wireGuardKeyDTO) {
+        return new WireGuardKey(UUID.fromString(wireGuardKeyDTO.getUuid()), wireGuardKeyDTO.getPublicKey(), wireGuardKeyDTO.getPrivateKey());
     }
 }

@@ -5,6 +5,8 @@ import de.luandtong.nachtwaechter.appl.repository.client.ClientInfoRepository;
 import de.luandtong.nachtwaechter.appl.repository.client.ServerPublicInfoRepository;
 import de.luandtong.nachtwaechter.domain.client.Client;
 
+import java.util.UUID;
+
 public class ClientService {
 
 
@@ -17,7 +19,7 @@ public class ClientService {
     private int serverID;
 
     public void init(int clientID) {
-        this.client = new Client(clientInfoRepository.findClientInfoByID(clientID), wireGuardKeyRepository.findWireGuardKeyByID(clientID), serverPublicInfoRepository.findServerPublicInfoByID(serverID));
+        this.client = new Client(UUID.randomUUID(), clientInfoRepository.findClientInfoByID(clientID), wireGuardKeyRepository.findWireGuardKeyByID(clientID), serverPublicInfoRepository.findServerPublicInfoByID(serverID));
     }
 
     public void saveClientInfo() {

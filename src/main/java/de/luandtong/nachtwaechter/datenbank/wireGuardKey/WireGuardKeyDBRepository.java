@@ -6,5 +6,4 @@ public interface WireGuardKeyDBRepository extends CrudRepository<WireGuardKeyDTO
 
 
     WireGuardKeyDTO findWireGuardKeyDTOById(Long id);
-
 }

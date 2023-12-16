@@ -1,4 +1,6 @@
 package de.luandtong.nachtwaechter.domain;
 
-public record WireGuardKey(String publicKey, String privateKey) {
+import java.util.UUID;
+
+public record WireGuardKey(UUID uuid, String publicKey, String privateKey) {
 }

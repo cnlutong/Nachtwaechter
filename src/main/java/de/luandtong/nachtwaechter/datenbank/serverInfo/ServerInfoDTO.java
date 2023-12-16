@@ -8,17 +8,21 @@ public class ServerInfoDTO {
 
     //String server_eth, String server_ip, String server_port, String pkgMgr
 
+    private final String wireGuardKeyUUID;
+    private final String uuid;
+    private final String serverEth;
+    private final String serverIp;
+    private final String serverPort;
+    private final String pkgMgr;
     @Id
     private long id;
-    private final String server_eth;
-    private final String server_ip;
-    private final String server_port;
-    private final String pkgMgr;
 
-    public ServerInfoDTO(String server_eth, String server_ip, String server_port, String pkgMgr) {
-        this.server_eth = server_eth;
-        this.server_ip = server_ip;
-        this.server_port = server_port;
+    public ServerInfoDTO(String wireGuardKeyUUID, String uuid, String serverEth, String serverIp, String serverPort, String pkgMgr) {
+        this.wireGuardKeyUUID = wireGuardKeyUUID;
+        this.uuid = uuid;
+        this.serverEth = serverEth;
+        this.serverIp = serverIp;
+        this.serverPort = serverPort;
         this.pkgMgr = pkgMgr;
     }
 
@@ -26,16 +30,24 @@ public class ServerInfoDTO {
         return id;
     }
 
-    public String getServer_eth() {
-        return server_eth;
+    public String getWireGuardKeyUUID() {
+        return wireGuardKeyUUID;
     }
 
-    public String getServer_ip() {
-        return server_ip;
+    public String getUuid() {
+        return uuid;
     }
 
-    public String getServer_port() {
-        return server_port;
+    public String getServerEth() {
+        return serverEth;
+    }
+
+    public String getServerIp() {
+        return serverIp;
+    }
+
+    public String getServerPort() {
+        return serverPort;
     }
 
     public String getPkgMgr() {

@@ -8,22 +8,28 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
+import java.util.UUID;
 
 import static de.luandtong.nachtwaechter.domain.Command.run;
 
 //领域事务
 public class Server {
 
-    private final ServerInfo serverInfo;
-    private final WireGuardKey wireGuardKey;
-    private final ServerConfig serverConfig;
+    private UUID uuid;
+    private ServerInfo serverInfo;
+    private WireGuardKey wireGuardKey;
+    private ServerConfig serverConfig;
 
     public Server(ServerInfo serverInfo, WireGuardKey wireGuardKey) {
         this.serverInfo = serverInfo;
         this.wireGuardKey = wireGuardKey;
         this.serverConfig = new ServerConfig();
+        this.uuid = this.serverInfo.uuid();
     }
 
+
+    public Server() {
+    }
 
     public void serverInit() throws IOException, InterruptedException {
 
@@ -68,16 +74,6 @@ public class Server {
     }
 
 
-    // 创建ServerInfo数据类
-    private ServerInfo creativeServerInfo() throws IOException, InterruptedException {
-        //String server_eth, String server_ip, String server_port, String pkgMgr
-        String server_eth = run("ip -o -4 route show to default | awk '{print $5}'");
-        String server_ip = run("curl -s ifconfig.me");
-        String server_port = "6888";
-        String pkgMgr = getPackageManagerCmd();
-        return new ServerInfo(server_eth, server_ip, server_port, pkgMgr);
-    }
-
     //创建ServerKey数据类
     private WireGuardKey creativeServerKey() throws IOException, InterruptedException {
         // 生成 WireGuard 私钥和公钥
@@ -87,7 +83,17 @@ public class Server {
         String server_private = run("sudo cat /etc/wireguard/server_private.key");
         String server_public = run("sudo cat /etc/wireguard/server_public.key");
 
-        return new WireGuardKey(server_public, server_private);
+        return new WireGuardKey(UUID.randomUUID(), server_public, server_private);
+    }
+
+    // 创建ServerInfo数据类
+    private ServerInfo creativeServerInfo() throws IOException, InterruptedException {
+        //String server_eth, String server_ip, String server_port, String pkgMgr
+        String server_eth = run("ip -o -4 route show to default | awk '{print $5}'");
+        String server_ip = run("curl -s ifconfig.me");
+        String server_port = "6888";
+        String pkgMgr = getPackageManagerCmd();
+        return new ServerInfo(UUID.randomUUID(), this.wireGuardKey.uuid(), server_eth, server_ip, server_port, pkgMgr);
     }
 
     private void serverInstall() throws IOException, InterruptedException {

@@ -1,4 +1,6 @@
 package de.luandtong.nachtwaechter.domain.client;
 
-public record ClientInfo(int clientIndex, String clientName, String clientIP) {
+import java.util.UUID;
+
+public record ClientInfo(UUID uuid, UUID WireGuardKeyUUID, int clientIndex, String clientName, String clientIP) {
 }

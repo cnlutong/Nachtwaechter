@@ -1,7 +1,7 @@
 package de.luandtong.nachtwaechter.appl.service;
 
-import de.luandtong.nachtwaechter.appl.repository.server.ServerInfoRepository;
 import de.luandtong.nachtwaechter.appl.repository.WireGuardKeyRepository;
+import de.luandtong.nachtwaechter.appl.repository.server.ServerInfoRepository;
 import de.luandtong.nachtwaechter.domain.server.Server;
 
 public class ServerService {
